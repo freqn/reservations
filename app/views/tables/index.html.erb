@@ -13,6 +13,8 @@
       <td><%= table.name %></td>
       <td><%= table.seats %></td>
       <td><%= link_to 'View', table_path(table)%></td>
+      <td><%= link_to 'Edit', edit_table_path(table)%></td>
+      <td><%= link_to 'Delete', table_path(table), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(version: 2018_07_11_152844) do
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "tables_id"
+    t.integer "table_id"
     t.datetime "start"
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tables_id"], name: "index_reservations_on_tables_id"
+    t.index ["table_id"], name: "index_reservations_on_table_id"
   end
 
   create_table "tables", force: :cascade do |t|

@@ -1,0 +1,28 @@
+<%= form_with model: @table, local: true do |form|  %>
+  <% if @table.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        The following errors prevented this table from being saved:
+      </h2>
+      <ul>
+        <% @table.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, placeholder: 'a new table' %>
+  </p>
+
+  <p>
+    <%= form.label :seats %><br>
+    <%= form.number_field :seats, min: 2, max: 10, step: 1, value: 6 %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
