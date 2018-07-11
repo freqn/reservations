@@ -1,0 +1,6 @@
+request specs
+styling
+actually designed user workflow
+sending emails
+cancelling reservations (stretch goal)
+better user experience around unavailable tables / date selection
