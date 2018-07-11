@@ -3,9 +3,7 @@ class Table < ApplicationRecord
   validates :name, presence: true
   validates :seats, presence: true, inclusion: { in: 2..10 }
 
-  def self.select_smallest_available(party_size:, start:, duration:)
-    end_time = start + duration.hours
-
+  def self.select_smallest_available(party_size:, start:, end_time:)
     Table.where('seats >= ?', party_size)
          .order('seats ASC')
          .left_outer_joins(:reservations)

@@ -4,9 +4,9 @@ RSpec.describe Table, type: :model do
   describe ".select_smallest_available" do
     let(:party_size) { 6 }
     let(:start) { Time.now }
-    let(:duration) { 3 }
+    let(:end_time) { start + 3.hours }
 
-    subject { described_class.select_smallest_available(party_size: party_size, start: start, duration: duration) }
+    subject { described_class.select_smallest_available(party_size: party_size, start: start, end_time: end_time) }
 
     context "when a free table exists with enough capacity" do
       let!(:free_table) { Table.create!(seats: party_size, name: "a nice table") }
@@ -41,7 +41,7 @@ RSpec.describe Table, type: :model do
     context "when the table already has a reservation" do
       before do
         table = Table.create!(name: "reserved table", seats: party_size)
-        Reservation.create_with_duration!(table: table, party_size: party_size, start: start, duration: duration)
+        Reservation.create!(table: table, party_size: party_size, start: start, end_time: end_time)
       end
 
       it "returns nil" do
