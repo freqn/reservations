@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_11_151749) do
+ActiveRecord::Schema.define(version: 2018_07_11_152844) do
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer "tables_id"
+    t.datetime "start"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tables_id"], name: "index_reservations_on_tables_id"
+  end
 
   create_table "tables", force: :cascade do |t|
     t.integer "seats"
