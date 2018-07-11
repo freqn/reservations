@@ -1,3 +1,3 @@
 class Reservation < ApplicationRecord
-  belongs_to :tables
+  belongs_to :table
 end
