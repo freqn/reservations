@@ -22,6 +22,7 @@ class ReservationsController < ApplicationController
     return render 'new' unless @reservation.valid?
 
     @reservation = @table.reservations.create!(reservation_params)
+    ReservationMailer.confirmation_email(@reservation).deliver
     flash[:message] = "You're all set! You will receive an e-mail with confirmation details shortly."
     redirect_to "/"
   end

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your reservation details:</h1>
+    <p>Date: <%= @reservation.start.strftime("%B %d, %Y") %></p>
+    <p>Time: <%= @reservation.start.strftime("%I:%M %p") %></p>
+    <p>Party Size: <%= @reservation.party_size %></p>
+  </body>
+</html>
