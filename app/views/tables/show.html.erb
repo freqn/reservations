@@ -8,4 +8,8 @@
   <%= @table.seats %>
 </p>
 
+<h2>Reservations</h2>
+<%= render @table.reservations %>
+
+<%= link_to 'Edit', edit_table_path(@table) %> |
 <%= link_to 'Back', tables_path %>
