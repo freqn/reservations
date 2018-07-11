@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  http_basic_authenticate_with name: "admin", password: "secret", only: [:destroy]
+
   def index
     @reservation = Reservation.new()
   end
@@ -8,7 +10,14 @@ class ReservationsController < ApplicationController
   end
 
   def create
+    @reservation = Reservation.new(reservation_params)
     @table       = Table.select_smallest_available(reservation_params)
+
+    unless @table
+      flash[:notice] = "No available tables at the selected time. :("
+      return render 'new'
+    end
+
     @reservation = @table.reservations.create(reservation_params)
     redirect_to table_path(@table)
   end

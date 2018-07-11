@@ -6,9 +6,15 @@ class Table < ApplicationRecord
   def self.select_smallest_available(party_size:, start:, end_time:)
     Table.where('seats >= ?', party_size)
          .order('seats ASC')
-         .left_outer_joins(:reservations)
-         .where.not('reservations.start IS NOT NULL AND reservations.start BETWEEN ? and ?', start, end_time)
-         .where.not('reservations.start IS NOT NULL AND reservations.end_time BETWEEN ? and ?', start, end_time)
-         .first
+         .left_joins(:reservations)
+         .find { |table| table.is_available?(start: start, end_time: end_time) }
+  end
+
+  def is_available?(start:, end_time:)
+    return true if reservations.count == 0
+
+    reservations
+    .where('reservations.start < ? AND reservations.end_time > ?', end_time, start)
+    .empty?
   end
 end
