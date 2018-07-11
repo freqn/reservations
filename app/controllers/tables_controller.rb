@@ -29,6 +29,7 @@ class TablesController < ApplicationController
 
   def update
     @table = Table.find(params[:id])
+
     if @table.update(table_params)
       redirect_to table_path(@table)
     else

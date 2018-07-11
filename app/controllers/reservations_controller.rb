@@ -14,12 +14,13 @@ class ReservationsController < ApplicationController
     @table       = Table.select_smallest_available(reservation_params)
 
     unless @table
-      flash[:notice] = "No available tables at the selected time. :("
+      flash[:message] = "No available tables at the selected time. :("
       return render 'new'
     end
 
     @reservation = @table.reservations.create(reservation_params)
-    redirect_to table_path(@table)
+    flash[:message] = "You're all set! You will receive an e-mail with confirmation details shortly."
+    redirect_to "/"
   end
 
   private
