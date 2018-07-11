@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   def index
+    @reservation = Reservation.new()
   end
 
   def new
@@ -7,8 +8,8 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @table = Table.select_smallest_available(size: params[:table_size])
-    @reservation = @table.reservations.create!(reservation_params)
+    @table = Table.select_smallest_available(reservation_params)
+    @reservation = @table.reservations.create_with_duration!(reservation_params)
     redirect_to table_path(@table)
     # should show a flash saying success
     # should send an e-mail
@@ -16,6 +17,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:start, :duration)
+    params.require(:reservation).permit(:start, :duration, :party_size)
   end
 end
