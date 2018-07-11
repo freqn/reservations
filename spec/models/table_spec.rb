@@ -41,7 +41,13 @@ RSpec.describe Table, type: :model do
     context "when the table already has a reservation" do
       before do
         table = Table.create!(name: "reserved table", seats: party_size)
-        Reservation.create!(table: table, party_size: party_size, start: start, end_time: end_time)
+        Reservation.create!(
+          table: table,
+          party_size: party_size,
+          start: start,
+          end_time: end_time,
+          email: "foo@bar.com"
+        )
       end
 
       it "returns nil" do

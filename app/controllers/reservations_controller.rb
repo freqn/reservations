@@ -11,14 +11,17 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-    @table       = Table.select_smallest_available(reservation_params)
+    @table       = Table.select_smallest_available(@reservation)
 
     unless @table
       flash[:message] = "No available tables at the selected time. :("
       return render 'new'
     end
 
-    @reservation = @table.reservations.create(reservation_params)
+    @reservation.table = @table
+    return render 'new' unless @reservation.valid?
+
+    @reservation = @table.reservations.create!(reservation_params)
     flash[:message] = "You're all set! You will receive an e-mail with confirmation details shortly."
     redirect_to "/"
   end
@@ -29,7 +32,8 @@ class ReservationsController < ApplicationController
     {
       party_size: params[:reservation][:party_size],
       end_time: calculated_end_time(),
-      start: deuglified_start_datetime()
+      start: deuglified_start_datetime(),
+      email: params[:reservation][:email]
     }
   end
 
