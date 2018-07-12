@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   http_basic_authenticate_with name: "admin", password: "secret", only: [:destroy]
 
   def index
-    @reservation = Reservation.new()
+    @tables = Table.all.includes(:reservations)
   end
 
   def new

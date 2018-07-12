@@ -10,10 +10,12 @@
   </head>
 
   <body>
-    <% if flash[:message] %>
-      <div class="notice"><%= flash[:message] %></div>
-    <% end %>
-
-    <%= yield %>
+    <div class="container text-center">
+      <%= render 'navbar' %>
+      <% if flash[:message] %>
+        <div class="notice"><%= flash[:message] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

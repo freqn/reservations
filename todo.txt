@@ -1,6 +1,9 @@
-request specs
-styling
-actually designed user workflow
-cancelling reservations (stretch goal)
-better user experience around unavailable tables / date selection
+CRITICAL
 deploy to heroku
+
+NICE TO HAVE
+request specs
+cancelling reservations
+better user experience around unavailable tables / date selection
+send mail in background job
+stop doing janky things in reservations controller with params

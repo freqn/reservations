@@ -8,8 +8,25 @@
   <%= @table.seats %>
 </p>
 
-<h2>Reservations</h2>
-<%= render @table.reservations %>
+<%= link_to 'Edit', edit_table_path(@table), class: 'btn btn-warning' %> |
+<%= link_to 'Back', tables_path, class: 'btn btn-info' %>
 
-<%= link_to 'Edit', edit_table_path(@table) %> |
-<%= link_to 'Back', tables_path %>
+<table class='table table-striped table-bordered'>
+  <caption>Reservations</caption>
+
+  <tr>
+    <th>Start</th>
+    <th>End</th>
+    <th>Party Size</th>
+    <th>Contact Email</th>
+  </tr>
+
+  <% @table.reservations.sort_by(&:start).each do |reservation| %>
+    <tr>
+      <td class='col-lg-2'><%= reservation.start %></td>
+      <td class='col-lg-2'><%= reservation.end_time %></td>
+      <td class='col-lg-1'><%= reservation.party_size %></td>
+      <td class='col-lg-1'><%= reservation.email %></td>
+    </tr>
+  <% end %>
+</table>

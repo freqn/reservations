@@ -1,5 +1,52 @@
 <h1>Make Reservation</h1>
 
-<%= render 'form' %>
+<%= form_with(model: @reservation, local: true, html: { role: 'form' } ) do |form| %>
+  <% if @reservation.errors.any? %>
+    <div>
+      <h2 class="danger">
+        The following errors prevented this reservation from being saved:
+      </h2>
+      <ul>
+        <% @reservation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', reservations_path %>
+  <div class='row'>
+    <div class='form-group col-lg-6 col-lg-offset-3'>
+        <%= form.label :start, 'Reservation Time' %><br>
+        <%= form.datetime_select :start, :ampm => true, :minute_step => 30 %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='form-group col-lg-6 col-lg-offset-3'>
+        <%= form.label :duration, 'Reservation Length in Hours' %>
+        <%= form.number_field :duration, min: 2, max: 8, step: 0.5, value: 2, class: 'form-control text-center' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='form-group col-lg-6 col-lg-offset-3'>
+        <%= form.label :party_size, 'Party Size' %>
+        <%= form.number_field :party_size, min: 2, max: 10, step: 1, value: 2, class: 'form-control text-center' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='form-group col-lg-6 col-lg-offset-3'>
+        <%= form.label :email, 'Email' %>
+        <%= form.text_field :email, class: 'form-control text-center', placeholder: 'your_email@example.com' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <p class='col-lg-6 col-lg-offset-3'>
+      <%= form.submit class: 'btn btn-primary' %>
+    </p>
+  </div>
+<% end %>
+
+<%= link_to 'Back', root_path %>

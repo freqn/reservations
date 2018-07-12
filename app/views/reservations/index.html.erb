@@ -1,1 +1,21 @@
-<%= render 'form' %>
+<table class='table table-striped table-bordered'>
+  <caption>Reservations</caption>
+  <% @tables.each do |table| %>
+      <tr>
+        <th>Start</th>
+        <th>End</th>
+        <th>Party Size</th>
+        <th>Contact Email</th>
+      </tr>
+      <tr><th><%= "#{table.name} (#{table.seats} seats)" %></th></tr>
+
+    <% table.reservations.sort_by(&:start).each do |reservation| %>
+      <tr>
+        <td class='col-lg-2'><%= reservation.start %></td>
+        <td class='col-lg-2'><%= reservation.end_time %></td>
+        <td class='col-lg-1'><%= reservation.party_size %></td>
+        <td class='col-lg-1'><%= reservation.email %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
