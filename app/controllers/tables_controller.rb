@@ -1,5 +1,5 @@
 class TablesController < ApplicationController
-  http_basic_authenticate_with name: "admin", password: "secret"
+  http_basic_authenticate_with name: ADMIN_USERNAME, password: ADMIN_PASSWORD
 
   def index
     @tables = Table.all()
