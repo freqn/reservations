@@ -5,8 +5,16 @@ RSpec.describe Table, type: :model do
     let(:party_size) { 6 }
     let(:start) { Time.now }
     let(:end_time) { start + 3.hours }
+    let(:reservation) do
+      Reservation.new(
+        party_size: party_size,
+        start: start, end_time:
+        end_time,
+        email: "foo@bar.com"
+      )
+    end
 
-    subject { described_class.select_smallest_available(party_size: party_size, start: start, end_time: end_time) }
+    subject { described_class.select_smallest_available(reservation) }
 
     context "when a free table exists with enough capacity" do
       let!(:free_table) { Table.create!(seats: party_size, name: "a nice table") }
