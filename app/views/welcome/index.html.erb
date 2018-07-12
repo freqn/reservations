@@ -1,3 +1,22 @@
-<h1>Fancy New Restaurant</h1>
-<h3>So fancy. The fanciest. Do you fancy it?</h3>
-<%= link_to 'Make a Reservation', new_reservation_path(), class: 'btn btn-info' %>
+<div class="restaurant-title">
+  <h1>Fancy New Restaurant</h1>
+  <h3>So fancy. The fanciest. Do you fancy it?</h3>
+</div>
+
+<%= link_to 'Make a Reservation', new_reservation_path(), class: 'btn btn-info btn-lg reservation-btn' %>
+
+<footer class="row info-bar page-footer navbar-bottom">
+  <div class="col-lg-4 info-container">
+    <h4>Fresh food, expertly crafted. Fancy New Restaurant's award-winning chefs handpick the best local meat and produce.</h4>
+  </div>
+
+  <div class="col-lg-4 info-container lightblue">
+    <h4>1 Fancy New Restaurant Way</h4>
+    <h4>Imaginarytown, State</h4>
+    <h4>(555) 555-5555</h4>
+  </div>
+
+  <div class="col-lg-4 info-container">
+    <h3>Eat it, yo.</h3>
+  </div>
+</div>
